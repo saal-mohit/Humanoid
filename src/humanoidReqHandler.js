@@ -52,14 +52,21 @@ class HumanoidReqHandler {
 	}
 	
 	async _decompressBrotli(res) {
-		res.body = await zlib.brotliDecompress(res.body, {});
-		return res;
+		return new Promise((resolve, reject) => {
+			res.body = await zlib.brotliDecompress(res.body, (err, result) => {
+				if (err) {
+					reject(err);
+				} else {
+					resolve(result);
+				}
+			});
+		})
 	}
 	
 	_getRequestHeaders(url) {
 		let headers = {};
 		headers["Accept"] = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
-		headers["Accept-Encoding"] = "deflate";
+		headers["Accept-Encoding"] = "gzip, deflate, br";
 		headers["Connection"] = "keep-alive";
 		headers["Host"] = this._parseUrl(url).host;
 		headers["User-Agent"] = this.UA;
@@ -84,7 +91,7 @@ class HumanoidReqHandler {
 		// Send the request
 		let res = await rpn(url, currConfig);
 		// Decompress Brotli content-type if returned (Unsupported natively by `request`)
-		// res = res.headers["content-encoding"] === "br" ? await this._decompressBrotli(res) : res;
+		res = res.headers["content-encoding"] === "br" ? await this._decompressBrotli(res) : res;
 		
 		if (dataType === "json") {
 			res.body = JSON.stringify(res.body);
