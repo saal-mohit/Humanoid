@@ -84,7 +84,7 @@ class HumanoidReqHandler {
 		// Send the request
 		let res = await rpn(url, currConfig);
 		// Decompress Brotli content-type if returned (Unsupported natively by `request`)
-		res = res.headers["content-encoding"] === "br" ? await this._decompressBrotli(res) : res;
+		// res = res.headers["content-encoding"] === "br" ? await this._decompressBrotli(res) : res;
 		
 		if (dataType === "json") {
 			res.body = JSON.stringify(res.body);

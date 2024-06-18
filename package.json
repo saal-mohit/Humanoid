@@ -31,8 +31,7 @@
     "request": "^2.88.0",
     "request-promise-native": "^1.0.5",
     "safe-eval": "^0.4.1",
-    "url-parse": "^1.4.3",
-    "zlib": "^1.0.5"
+    "url-parse": "^1.4.3"
   },
   "devDependencies": {
     "eslint": "^5.6.1",
