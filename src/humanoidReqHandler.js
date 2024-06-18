@@ -52,15 +52,7 @@ class HumanoidReqHandler {
 	}
 
 	async _decompressBrotli(res) {
-		res.body = await new Promise((resolve, reject) => {
-			zlib.brotliDecompress(res.body, (err, result) => {
-				if (err) {
-					reject(err);
-				} else {
-					resolve(result);
-				}
-			});
-		})
+		res.body = await zlib.deflate(res.body).__promisify__();
 		return res;
 	}
 
