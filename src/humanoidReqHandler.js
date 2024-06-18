@@ -56,6 +56,7 @@ class HumanoidReqHandler {
 			if (err) {
 				reject(err);
 			} else {
+				console.log(":::compression sucessful", result);
 				resolve(result);
 			}
 		}));
@@ -106,6 +107,7 @@ class HumanoidReqHandler {
 			// Session is definitely challenged
 			isSessionChallenged = true;
 		}
+		console.log("::::::", res.body);
 
 		return new Response(
 			res.statusCode, res.statusMessage,
