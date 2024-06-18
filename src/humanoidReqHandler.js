@@ -59,7 +59,7 @@ class HumanoidReqHandler {
 	_getRequestHeaders(url) {
 		let headers = {};
 		headers["Accept"] = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
-		headers["Accept-Encoding"] = "gzip, deflate, br";
+		headers["Accept-Encoding"] = "deflate";
 		headers["Connection"] = "keep-alive";
 		headers["Host"] = this._parseUrl(url).host;
 		headers["User-Agent"] = this.UA;
@@ -76,7 +76,7 @@ class HumanoidReqHandler {
 		method = method !== undefined ? method.toUpperCase() : "GET";
 		dataType = dataType.toLowerCase();
 		// Build configuration
-		let currConfig = {...this.config};
+		let currConfig = { ...this.config };
 		currConfig.headers = headers;
 		currConfig.method = method;
 		currConfig = data !== undefined ? this._getConfForMethod(method, currConfig, data, dataType) : currConfig;
