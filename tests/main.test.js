@@ -130,7 +130,6 @@ test("Extract challenge", () => {
 test("Test br decoding", async () => {
 	
 	const response = await new Humanoid().get('https://sofifa.com/players?offset=60');
-	console.log("::::", response);
 	expect(true).toBe(true);
 });
 
