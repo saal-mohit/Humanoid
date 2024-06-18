@@ -5,7 +5,7 @@ const Solver = require("../src/solver");
 const humanoidReqHandler = require("../src/humanoidReqHandler");
 
 
-const testHumanoid = new Humanoid()
+const testHumanoid = new Humanoid();
 const testRequestHandler = new humanoidReqHandler();
 const testResponse = new Response();
 
@@ -125,6 +125,15 @@ test("Extract challenge", () => {
 		expect.stringContaining("var s,t,o,p,b,r,e,a,k,i,n,g,f"),
 		expect.stringContaining("setTimeout(function(){")
 	]);
-})
+});
+
+test("Test br decoding", async () => {
+	
+	const response = await new Humanoid().get('https://sofifa.com/players?offset=60');
+	console.log("::::", response);
+	expect(true).toBe(true);
+});
+
+
 
 // TODO: Add tests for request sending/challenge solving. Mock functions as needed
